@@ -1,0 +1,75 @@
+@model Travel_App.Models.Place
+
+@{
+    ViewData["Title"] = "Edit Place";
+}
+
+<h1>Edit Your Review</h1>
+<hr />
+<div style="max-width: 600px; margin: auto;">
+    <form asp-action="Edit" enctype="multipart/form-data" style="margin-bottom: 20px;">
+        <!-- Name Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Name" style="display: block; margin-bottom: 5px;"></label>
+            <input asp-for="Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            <span asp-validation-for="Name" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+
+        <!-- Description Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Description" style="display: block; margin-bottom: 5px;"></label>
+            <textarea asp-for="Description" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            <span asp-validation-for="Description" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+
+        <!-- ImageUrl Field -->
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px;">Current Image</label>
+            <div>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Place Image" style="max-width: 100%; height: auto; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;" />
+                }
+            </div>
+            <label asp-for="ImageUrl" style="display: block; margin-bottom: 5px;">Upload New Image</label>
+            <input type="file" asp-for="ImageUrl" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            <span asp-validation-for="ImageUrl" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+
+        <!-- Continent Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Continent" style="display: block; margin-bottom: 5px;"></label>
+            <select asp-for="Continent" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Select a Continent</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="Africa">Africa</option>
+                <option value="North America">North America</option>
+                <option value="South America">South America</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Antarctica">Antarctica</option>
+            </select>
+            <span asp-validation-for="Continent" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+
+        <!-- Save Changes Button -->
+        <div>
+            <input type="submit" value="Save Changes" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" />
+        </div>
+    </form>
+
+    <!-- Delete Review Button -->
+    <form asp-action="Delete" method="post" style="margin-top: 20px;">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete Review" style="padding: 10px 20px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;" />
+    </form>
+
+    <!-- Back to Details Button -->
+    <div style="margin-top: 20px;">
+        <a asp-action="Details" asp-route-placeId="@Model.Id" style="padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">Back to Details</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

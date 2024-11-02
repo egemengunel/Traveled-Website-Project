@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Traveled</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775fi/XMv0HCX2Bpq7I1lJrXlb6EXmMO3" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .search-input {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .search-button img {
+            width: 20px;
+            height: 20px;
+            border: none; /* Remove border on hover */
+        }
+
+        .welcome-heading {
+            margin-top: 40px; /* Adjust the margin as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-column min-vh-100">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Traveled</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Places" asp-action="Create">Add a Review</a>
+                             </li>
+                        </ul>
+                        <form asp-action="Search" asp-controller="Places" method="get" class="search-container">
+                            <input class="form-control search-input" type="search" name="query" placeholder="Search a Destination" aria-label="Search">
+                            <button class="btn btn-outline-success search-button" type="submit">
+                                <img src="~/images/search-icon.png" alt="Search">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container flex-fill">
+            @RenderBody()
+        </div>
+        <footer class="border-top footer text-muted mt-auto py-3">
+            <div class="container">
+                &copy; 2024 - Traveled - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+    @RenderSection("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+@model Travel_App.Models.Place
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Your Review</h1>
+
+<hr />
+<div>
+    <form asp-action="Create" asp-controller="Places" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+        <!-- Name Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Name" style="display: block; margin-bottom: 5px;"></label>
+            <input asp-for="Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            <span asp-validation-for="Name" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+        
+        <!-- Description Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Description" style="display: block; margin-bottom: 5px;"></label>
+            <textarea asp-for="Description" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            <span asp-validation-for="Description" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+        
+        <!-- ImageUrl Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="ImageUrl" style="display: block; margin-bottom: 5px;"></label>
+            <input type="file" asp-for="ImageUrl" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            <span asp-validation-for="ImageUrl" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+        
+        <!-- Continent Field -->
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Continent" style="display: block; margin-bottom: 5px;"></label>
+            <select asp-for="Continent" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Select a Continent</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="Africa">Africa</option>
+                <option value="North America">North America</option>
+                <option value="South America">South America</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Antarctica">Antarctica</option>
+            </select>
+            <span asp-validation-for="Continent" style="color: red; display: block; margin-top: 5px;"></span>
+        </div>
+        
+        <!-- Submit Button -->
+        <div style="text-align: center;">
+            <input type="submit" value="Create" style="padding: 10px 20px; border: none; background-color: #007bff; color: white; border-radius: 4px; cursor: pointer;" />
+        </div>
+    </form>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a asp-action="Index" asp-controller="Home" style="padding: 10px 20px; border: none; background-color: #6c757d; color: white; border-radius: 4px; text-decoration: none; display: inline-block;">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

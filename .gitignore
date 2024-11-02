@@ -1,0 +1,50 @@
+# Ignore database files
+*.db
+*.db-shm
+*.db-wal
+
+# Ignore user-specific files
+.DS_Store
+*.txt
+
+# Ignore build and cache files
+bin/
+obj/
+*.cache
+*.dll
+*.exe
+*.pdb
+*.props
+*.targets
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.csproj.nuget.dgspec.json
+*.csproj.FileListAbsolute.txt
+*.csproj.CopyComplete
+
+# Ignore configuration files that contain sensitive data
+appsettings.json
+appsettings.Development.json
+
+# Ignore log files
+Logs/*.txt
+
+# Ignore macOS system files
+__MACOSX/
+
+# Ignore auto-generated files
+*.AssemblyInfo.*
+*.genruntimeconfig.cache
+*.RazorAssemblyInfo.*
+*.GeneratedMSBuildEditorConfig.*
+
+# Ignore IDE specific files
+*.sln.iml
+*.vs/
+.idea/
+.vscode/
+
+# Ignore external libraries
+bootstrap/
+jquery/
+dist/

@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1 class=" welcome-heading text-center">Welcome to Traveled!</h1>
+    <p class="text-center">Explore recent travel reviews and share your experiences.</p>
+
+   <h2>Recently Reviewed</h2>
+    <div id="recentReviewsCarousel"  class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @if (ViewBag.RecentPlaces != null && ViewBag.RecentPlaces.Count > 0)
+            {
+                for (int i = 0; i < ViewBag.RecentPlaces.Count; i += 3)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="row">
+                            @for (int j = i; j < i + 3 && j < ViewBag.RecentPlaces.Count; j++)
+                            {
+                                <div class="col-md-4">
+                                    <a href="@Url.Action("Details", "Reviews", new { placeId = ViewBag.RecentPlaces[j].Id })" class="text-decoration-none text-dark">
+                                        <div class="card mb-4 shadow-sm">
+                                            <img class="card-img-top" src="@ViewBag.RecentPlaces[j].ImageUrl" alt="Place image">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@ViewBag.RecentPlaces[j].Name</h5>
+                                                <p class="card-text">@ViewBag.RecentPlaces[j].Description</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="carousel-item active">
+                    <p>No recent places available.</p>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#recentReviewsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#recentReviewsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <h2>Continents</h2>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        @foreach (Travel_App.Models.GroupedPlaceViewModel group in ViewBag.GroupedPlaces)
+        {
+            var continent = group.Continent;
+            <li class="nav-item" role="presentation">
+            <button class="nav-link @(continent == ViewBag.GroupedPlaces[0].Continent ? "active" : "")" id="@continent-tab" data-bs-toggle="tab" data-bs-target="#@continent" type="button" role="tab" aria-controls="@continent" aria-selected="@(continent == ViewBag.GroupedPlaces[0].Continent)">@continent</button>
+            </li>
+        }
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        @foreach (var group in ViewBag.GroupedPlaces)
+{
+    var continent = group.Continent;
+    <div class="tab-pane fade @(continent == ViewBag.GroupedPlaces[0].Continent ? "show active" : "")" id="@continent" role="tabpanel" aria-labelledby="@continent-tab">
+        <div class="row">
+            @if (group.Places != null)
+            {
+                @foreach (var place in group.Places)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            @if (!string.IsNullOrEmpty(place.ImageUrl))
+                            {
+                                <img class="card-img-top" src="@place.ImageUrl" alt="Place image">
+                            }
+                            <div class="card-body">
+                                <h5 class="card-title">@place.Name</h5>
+                                <p class="card-text">@place.Description</p>
+                                <a href="@Url.Action("Details", "Reviews", new { placeId = place.Id })" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Bootstrap carousel auto-slide
+     new bootstrap.Carousel('#recentReviewsCarousel', {
+        interval: 5000,
+        ride: 'carousel'
+    });
+
+    // Bootstrap tab initialization
+    document.querySelectorAll('#myTab button').forEach(button => {
+    button.f('click', event => {
+        event.preventDefault();
+        new bootstrap.Tab(button).show();
+    });
+});
+</script>

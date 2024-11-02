@@ -1,0 +1,21 @@
+@model Travel_App.Models.Place
+
+<div style="max-width: 900px; margin: auto;">
+    @if (Model != null)
+    {
+        <h1 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 20px;">@Model.Name</h1>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="Place Image" style="width: 100%; height: auto; max-width: 800px; margin-bottom: 20px; display: block; border: 1px solid #ddd; border-radius: 4px;" />
+        }
+        <p style="font-size: 1.25rem;">@Model.Description</p>
+    }
+    else
+    {
+        <p>No place data found.</p>
+    }
+    <div style="margin-top: 20px;">
+        <a href="@Url.Action("Index", "Home")" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">Back to Home</a>
+        <a href="@Url.Action("Edit", "Reviews", new { id = Model?.Id })" style="padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 4px; display: inline-block; margin-left: 10px;">Edit</a>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+@model IEnumerable<Travel_App.Models.Place>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+
+@if (!Model.Any())
+{
+    <div style="padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 20px;">
+        No results found.
+    </div>
+}
+else
+{
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        @foreach (var place in Model)
+        {
+            <div style="flex: 1 1 calc(33.333% - 20px); box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); border-radius: 4px; overflow: hidden;">
+                @if (!string.IsNullOrEmpty(place.ImageUrl))
+                {
+                    <img src="@place.ImageUrl" alt="@place.Name" style="width: 100%; height: 225px; object-fit: cover;">
+                }
+                <div style="padding: 15px;">
+                    <p style="font-weight: bold;">@place.Name</p>
+                    <p>@place.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+}
